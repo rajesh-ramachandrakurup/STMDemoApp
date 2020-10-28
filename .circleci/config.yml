@@ -13,6 +13,7 @@ jobs:
 #            - restore_cache:
 #                key: 1-gems-{{ checksum "Gemfile.lock" }}
             - run: |
+                gem install bundler -v 2.1.4
                 bundle config set path 'vendor/bundle'
                 bundle check || bundle install
 #            - save_cache:
@@ -39,6 +40,7 @@ jobs:
 #            - restore_cache:
 #                key: 1-gems-{{ checksum "Gemfile.lock" }}
             - run: |
+                gem install bundler -v 2.1.4
                 bundle config set path 'vendor/bundle'
                 chruby 2.6.6 && bundle check || bundle install
 #            - save_cache:
