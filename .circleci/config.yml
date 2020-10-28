@@ -21,8 +21,8 @@ jobs:
             - run:
                 name: Set Ruby Version
                 command: |
-                echo 'chruby ruby-2.6.6' > ~/.ruby-version
-                ruby -v
+                    echo 'chruby ruby-2.6.6' > ~/.ruby-version
+                    ruby -v
             - run: bundle exec pod install
 
             - run:
@@ -46,11 +46,11 @@ jobs:
             - run:
                 name: Set Ruby Version
                 command: |
-                echo 'chruby ruby-2.6.6' > ~/.ruby-version
-                ruby -v
+                    echo 'chruby ruby-2.6.6' > ~/.ruby-version
+                    ruby -v
 
             - run: bundle exec pod install
-            
+
             - run:
                 name: fastlane
                 command: bundle exec fastlane ui_testsLane
