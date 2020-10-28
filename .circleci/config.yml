@@ -66,13 +66,13 @@ workflows:
                         only:
                             - /feature-.*/
 
-    pull-requests:
-        jobs:
-            - tests:
-                filters:
-                    branches:
-                        only:
-                            - /fix-.*/
+#    pull-requests:
+#        jobs:
+#            - tests:
+#                filters:
+#                    branches:
+#                        only:
+#                            - /fix-.*/
 
     develop-branch:
         jobs:
