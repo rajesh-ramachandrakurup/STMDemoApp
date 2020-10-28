@@ -14,13 +14,13 @@ public class Fastfile: LaneFile {
 
     // MARK: Lanes
 
-    func tests() {
+    func testsLane() {
         desc("Run iOS Unit tests")
         setup()
         runTests(scheme: "STMDemoAppTests", outputDirectory: "fastlane/test_output")
     }
 
-    func ui_tests() {
+    func ui_testsLane() {
         desc("Run iOS UItests")
         setup()
         runTests(scheme: "STMDemoAppUITests", outputDirectory: "fastlane/test_output")

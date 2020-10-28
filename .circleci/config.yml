@@ -24,7 +24,7 @@ jobs:
             - run: bundle exec pod install
             - run:
                 name: fastlane
-                command: bundle exec fastlane tests
+                command: bundle exec fastlane testsLane
 
     ui_tests:
         macos:
@@ -47,7 +47,7 @@ jobs:
             - run: bundle exec pod install
             - run:
                 name: fastlane
-                command: bundle exec fastlane ui_tests
+                command: bundle exec fastlane ui_testsLane
 
 workflows:
     version: 2
