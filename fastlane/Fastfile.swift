@@ -17,13 +17,13 @@ public class Fastfile: LaneFile {
     func testsLane() {
         desc("Run iOS Unit tests")
         setup()
-        runTests(scheme: "STMDemoAppTests", outputDirectory: "fastlane/test_output")
+        runTests(scheme: "STMDemoApp", outputDirectory: "fastlane/test_output")
     }
 
     func ui_testsLane() {
         desc("Run iOS UItests")
         setup()
-        runTests(scheme: "STMDemoAppUITests", outputDirectory: "fastlane/test_output")
+        runTests(scheme: "STMDemoApp", outputDirectory: "fastlane/test_output")
     }
 
     public func beforeAll(with lane: String) {
