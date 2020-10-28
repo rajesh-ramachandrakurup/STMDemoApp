@@ -1,0 +1,80 @@
+# For a detailed guide to building and testing on iOS, read the docs:
+# https://circleci.com/docs/2.0/testing-ios/
+
+version: 2.1
+
+jobs:
+    tests:
+        macos:
+            xcode: 12.0.1 # Specify the Xcode version to use
+        shell: /bin/bash --login -o pipefail
+        steps:
+            - checkout
+            - restore_cache:
+                key: 1-gems-{{ checksum "Gemfile.lock" }}
+            - run: bundle check || bundle install --path vendor/bundle
+            - save_cache:
+                key: 1-gems-{{ checksum "Gemfile.lock" }}
+                paths:
+                    - vendor/bundle
+            - run: bundle exec pod install
+            - run:
+                name: fastlane
+                command: bundle exec fastlane testLane
+
+    ui_tests:
+        macos:
+            xcode: 12.0.1 # Specify the Xcode version to use
+        steps:
+            - checkout
+            - restore_cache:
+                key: 1-gems-{{ checksum "Gemfile.lock" }}
+            - run: bundle check || bundle install --path vendor/bundle
+            - save_cache:
+                key: 1-gems-{{ checksum "Gemfile.lock" }}
+                paths:
+                    - vendor/bundle
+            - run: bundle exec pod install
+            - run:
+                name: fastlane
+                command: bundle exec fastlane testLane
+            - store_test_results:
+                path: test_output
+            - store_artifacts:
+                path: test_output
+                destination: scan-output
+
+workflows:
+    version: 2
+
+    feature-branch:
+        jobs:
+            - tests:
+                filters:
+                    branches:
+                        only:
+                            - /feature-.*/
+
+    pull-requests:
+        jobs:
+            - tests:
+                filters:
+                    branches:
+                        only:
+                            - /fix-.*/
+
+    develop-branch:
+        jobs:
+            - tests:
+                filters:
+                    branches:
+                        only:
+                            - develop
+
+            - ui_tests:
+                filters:
+                    branches:
+                        only:
+                            - develop
+                requires:
+                    - tests

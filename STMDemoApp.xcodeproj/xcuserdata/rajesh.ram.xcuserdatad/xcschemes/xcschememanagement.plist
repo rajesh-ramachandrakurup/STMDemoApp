@@ -7,7 +7,25 @@
 		<key>STMDemoApp.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>3</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>D6F8AE7A25492954002F71E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D6F8AE9025492956002F71E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D6F8AE9B25492956002F71E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
