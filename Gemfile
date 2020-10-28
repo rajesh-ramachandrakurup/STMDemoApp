@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# ruby '~> 2.6' # known problems on ruby 2.7.0
+ruby '~> 2.6' # known problems on ruby 2.7.0
 # gem 'ruby', '~> 2.6'
 gem 'fastlane','2.163.0'
 gem 'cocoapods', '1.9.3'
