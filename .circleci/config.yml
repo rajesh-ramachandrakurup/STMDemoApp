@@ -10,39 +10,54 @@ jobs:
         shell: /bin/bash --login -o pipefail
         steps:
             - checkout
-            - restore_cache:
-                key: 1-gems-{{ checksum "Gemfile.lock" }}
-            - run: bundle check || bundle install --path vendor/bundle
-            - save_cache:
-                key: 1-gems-{{ checksum "Gemfile.lock" }}
-                paths:
-                    - vendor/bundle
+#            - restore_cache:
+#                key: 1-gems-{{ checksum "Gemfile.lock" }}
+            - run: |
+                gem install bundler -v 2.1.4
+                bundle config set path 'vendor/bundle'
+                bundle check || bundle install
+#            - save_cache:
+#                key: 1-gems-{{ checksum "Gemfile.lock" }}
+#                paths:
+#                    - vendor/bundle
+            - run:
+                name: Set Ruby Version
+                command: |
+                     echo 'chruby ruby-2.6' >> ~/.bash_profile
+                     ruby -v
             - run: bundle exec pod install
+
             - run:
                 name: fastlane
-                command: bundle exec fastlane tests
+                command: bundle exec fastlane testsLane
 
     ui_tests:
         macos:
             xcode: 12.0.1 # Specify the Xcode version to use
+        shell: /bin/bash --login -o pipefail
         steps:
             - checkout
-            - restore_cache:
-                key: 1-gems-{{ checksum "Gemfile.lock" }}
-            - run: bundle check || bundle install --path vendor/bundle
-            - save_cache:
-                key: 1-gems-{{ checksum "Gemfile.lock" }}
-                paths:
-                    - vendor/bundle
-            - run: bundle exec pod install
+#            - restore_cache:
+#                key: 1-gems-{{ checksum "Gemfile.lock" }}
+            - run: |
+                gem install bundler -v 2.1.4
+                bundle config set path 'vendor/bundle'
+                bundle check || bundle install
+#            - save_cache:
+#                key: 1-gems-{{ checksum "Gemfile.lock" }}
+#                paths:
+#                    - vendor/bundle
+            - run:
+                name: Set Ruby Version
+                command: |
+                    echo 'chruby ruby-2.6.6' > ~/.ruby-version
+                    ruby -v
+
+            - run: chruby 2.6.6 && bundle exec pod install
+
             - run:
                 name: fastlane
-                command: bundle exec fastlane tests
-            - store_test_results:
-                path: test_output
-            - store_artifacts:
-                path: test_output
-                destination: scan-output
+                command: chruby 2.6.6 && bundle exec fastlane ui_testsLane
 
 workflows:
     version: 2
@@ -55,13 +70,13 @@ workflows:
                         only:
                             - /feature-.*/
 
-    pull-requests:
-        jobs:
-            - tests:
-                filters:
-                    branches:
-                        only:
-                            - /fix-.*/
+#    pull-requests:
+#        jobs:
+#            - tests:
+#                filters:
+#                    branches:
+#                        only:
+#                            - /fix-.*/
 
     develop-branch:
         jobs:
@@ -76,5 +91,13 @@ workflows:
                     branches:
                         only:
                             - develop
-                requires:
-                    - tests
+    nightly:
+        triggers:
+            - schedule:
+                cron: "20 21 * * *"
+                filters:
+                    branches:
+                        only:
+                            - develop
+        jobs:
+            - tests
