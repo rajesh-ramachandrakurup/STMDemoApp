@@ -13,18 +13,17 @@ jobs:
 #            - restore_cache:
 #                key: 1-gems-{{ checksum "Gemfile.lock" }}
             - run: |
-                gem install bundler -v 2.1.4
-                bundle config set path 'vendor/bundle'
-                bundle check || bundle install
+                 gem install bundler -v 2.1.4
+                 bundle install
 #            - save_cache:
 #                key: 1-gems-{{ checksum "Gemfile.lock" }}
 #                paths:
 #                    - vendor/bundle
-            - run:
-                name: Set Ruby Version
-                command: |
-                     echo 'chruby ruby-2.6' >> ~/.bash_profile
-                     ruby -v
+#            - run:
+#                name: Set Ruby Version
+#                command: |
+#                     echo 'chruby ruby-2.6' >> ~/.bash_profile
+#                     ruby -v
             - run: bundle exec pod install
 
             - run:
