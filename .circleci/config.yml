@@ -20,16 +20,16 @@ jobs:
 #                key: 1-gems-{{ checksum "Gemfile.lock" }}
 #                paths:
 #                    - vendor/bundle
-            - run:
-                name: Set Ruby Version
-                command: |
-                     echo 'source /usr/local/share/chruby/chruby.sh' >> $BASH_ENV
-                     echo 'chruby ruby-2.6.6' >> $BASH_ENV 
-            - run: chruby 2.6.6 && bundle exec pod install
+#            - run:
+#                name: Set Ruby Version
+#                command: |
+#                     echo 'source /usr/local/share/chruby/chruby.sh' >> $BASH_ENV
+#                     echo 'chruby ruby-2.6.6' >> $BASH_ENV
+            - run: bundle exec pod install
 
             - run:
                 name: fastlane
-                command: chruby 2.6.6 && bundle exec fastlane testsLane
+                command: bundle exec fastlane testsLane
 
     ui_tests:
         macos:
@@ -42,7 +42,7 @@ jobs:
             - run: |
                 gem install bundler -v 2.1.4
                 bundle config set path 'vendor/bundle'
-                chruby 2.6.6 && bundle check || bundle install
+                bundle check || bundle install
 #            - save_cache:
 #                key: 1-gems-{{ checksum "Gemfile.lock" }}
 #                paths:
