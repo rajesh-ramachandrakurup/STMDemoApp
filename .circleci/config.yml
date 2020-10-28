@@ -18,9 +18,9 @@ jobs:
                 paths:
                     - vendor/bundle
             - run: bundle exec pod install
-            # - run:
-            #     name: fastlane
-            #     command: bundle exec fastlane testLane
+             - run:
+                 name: fastlane
+                 command: bundle exec fastlane tests
 
     ui_tests:
         macos:
@@ -34,15 +34,10 @@ jobs:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
                 paths:
                     - vendor/bundle
-            # - run: bundle exec pod install
-            # - run:
-            #     name: fastlane
-            #     command: bundle exec fastlane testLane
-            # - store_test_results:
-            #     path: test_output
-            # - store_artifacts:
-            #     path: test_output
-            #     destination: scan-output
+             - run: bundle exec pod install
+             - run:
+                 name: fastlane
+                 command: bundle exec fastlane ui_tests
 
 workflows:
     version: 2
@@ -76,5 +71,11 @@ workflows:
                     branches:
                         only:
                             - develop
-                requires:
-                    - tests
+    nightly:
+        triggers:
+            - schedule:
+                cron: "20 21 * * *"
+                filters:
+                    branches:
+                        only:
+                            - develop
