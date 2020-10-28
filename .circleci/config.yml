@@ -12,15 +12,16 @@ jobs:
             - checkout
             - restore_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
-            - run: bundle check || bundle install --path vendor/bundle
+            - run:
+                bundle check || bundle install --path vendor/bundle
             - save_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
                 paths:
                     - vendor/bundle
             - run: bundle exec pod install
-             - run:
-                 name: fastlane
-                 command: bundle exec fastlane tests
+            - run:
+                name: fastlane
+                command: bundle exec fastlane tests
 
     ui_tests:
         macos:
@@ -29,15 +30,16 @@ jobs:
             - checkout
             - restore_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
-            - run: bundle check || bundle install --path vendor/bundle
+            - run:
+                bundle check || bundle install --path vendor/bundle
             - save_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
                 paths:
                     - vendor/bundle
-             - run: bundle exec pod install
-             - run:
-                 name: fastlane
-                 command: bundle exec fastlane ui_tests
+            - run: bundle exec pod install
+            - run:
+                name: fastlane
+                command: bundle exec fastlane ui_tests
 
 workflows:
     version: 2
