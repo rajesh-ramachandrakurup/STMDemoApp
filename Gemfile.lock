@@ -246,9 +246,12 @@ PLATFORMS
 DEPENDENCIES
   cocoapods (= 1.9.3)
   cocoapods-repo-update
-  fastlane (= 2.163.0)
+  fastlane
   fastlane-plugin-upload_symbols_to_new_relic
   xcode-install
+
+RUBY VERSION
+   ruby 2.6.3p62
 
 BUNDLED WITH
    2.1.4
