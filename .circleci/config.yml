@@ -81,3 +81,5 @@ workflows:
                     branches:
                         only:
                             - develop
+        jobs:
+            - tests
