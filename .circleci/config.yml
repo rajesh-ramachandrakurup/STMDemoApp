@@ -12,37 +12,42 @@ jobs:
             - checkout
             - restore_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
-            - run: bundle check || bundle install --path vendor/bundle
+            - run: |
+                chruby 2.6.6 && gem install bundler
+                chruby 2.6.6 && bundle install --path vendor/bundle
             - save_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
                 paths:
                     - vendor/bundle
-            - run: bundle exec pod install
-            # - run:
-            #     name: fastlane
-            #     command: bundle exec fastlane testLane
 
-    ui_tests:
+            - run: chruby 2.6.6 && bundle exec pod install
+            - run: chruby 2.6.6 && ruby -v
+
+            - run:
+                name: fastlane
+                command: chruby 2.6.6 && bundle exec fastlane tests --verbose
+
+    alternateTests:
         macos:
             xcode: 12.0.1 # Specify the Xcode version to use
+        shell: /bin/bash --login -o pipefail
         steps:
             - checkout
             - restore_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
-            - run: bundle check || bundle install --path vendor/bundle
+            - run: |
+                gem install bundler
+                bundle check || bundle install --path vendor/bundle
             - save_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
                 paths:
                     - vendor/bundle
-            # - run: bundle exec pod install
-            # - run:
-            #     name: fastlane
-            #     command: bundle exec fastlane testLane
-            # - store_test_results:
-            #     path: test_output
-            # - store_artifacts:
-            #     path: test_output
-            #     destination: scan-output
+
+            - run: bundle exec pod install
+
+            - run:
+                name: fastlane
+                command: bundle exec fastlane ui_tests
 
 workflows:
     version: 2
@@ -55,13 +60,13 @@ workflows:
                         only:
                             - /feature-.*/
 
-    pull-requests:
-        jobs:
-            - tests:
-                filters:
-                    branches:
-                        only:
-                            - /fix-.*/
+#    pull-requests:
+#        jobs:
+#            - tests:
+#                filters:
+#                    branches:
+#                        only:
+#                            - /fix-.*/
 
     develop-branch:
         jobs:
@@ -71,10 +76,18 @@ workflows:
                         only:
                             - develop
 
-            - ui_tests:
+            - alternateTests:
                 filters:
                     branches:
                         only:
                             - develop
-                requires:
-                    - tests
+    nightly:
+        triggers:
+            - schedule:
+                cron: "20 21 * * *"
+                filters:
+                    branches:
+                        only:
+                            - develop
+        jobs:
+            - tests

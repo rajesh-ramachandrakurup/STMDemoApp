@@ -47,6 +47,7 @@
 		BAF68FB937BBAE9A952027C8 /* Pods-STMDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STMDemoApp.release.xcconfig"; path = "Target Support Files/Pods-STMDemoApp/Pods-STMDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 		C05FBD6284BD4119B297D43D /* Pods_STMDemoAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STMDemoAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3FD43517AC8354630C5A702 /* Pods-STMDemoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STMDemoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-STMDemoAppTests/Pods-STMDemoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D670A2B52549A4D100EEA387 /* config.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = config.yml; path = .circleci/config.yml; sourceTree = "<group>"; };
 		D6F8AE7B25492954002F71E4 /* STMDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STMDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F8AE7E25492954002F71E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6F8AE8025492954002F71E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,13 +112,13 @@
 				C3FD43517AC8354630C5A702 /* Pods-STMDemoAppTests.debug.xcconfig */,
 				82A7ED40E36A39A89FDF1C4E /* Pods-STMDemoAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		D6F8AE7225492954002F71E4 = {
 			isa = PBXGroup;
 			children = (
+				D670A2B52549A4D100EEA387 /* config.yml */,
 				D6F8AE7D25492954002F71E4 /* STMDemoApp */,
 				D6F8AE9425492956002F71E4 /* STMDemoAppTests */,
 				D6F8AE9F25492956002F71E4 /* STMDemoAppUITests */,
