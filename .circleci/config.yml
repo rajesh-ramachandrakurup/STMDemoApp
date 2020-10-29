@@ -24,7 +24,7 @@ jobs:
 
             - run:
                 name: fastlane
-                command: chruby 2.6.6 && bundle exec fastlane tests
+                command: chruby 2.6.6 && bundle exec fastlane tests --verbose
 
     ui_tests:
         macos:
