@@ -19,6 +19,9 @@ jobs:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
                 paths:
                     - vendor/bundle
+            - run:
+                name: Env
+                command: echo ${MY_ENV_VAR}
 
             - run: chruby 2.6.6 && bundle exec pod install
             - run: chruby 2.6.6 && ruby -v
