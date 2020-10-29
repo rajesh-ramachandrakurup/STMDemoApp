@@ -21,6 +21,7 @@ jobs:
                     - vendor/bundle
 
             - run: chruby 2.6.6 && bundle exec pod install
+            - run: chruby 2.6.6 && ruby -v
 
             - run:
                 name: fastlane
