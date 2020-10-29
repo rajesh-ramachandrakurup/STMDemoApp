@@ -21,6 +21,7 @@ public class Fastfile: LaneFile {
             workspace: "STMDemoApp.xcworkspace",
             scheme: "STMDemoAppTests",
             device: "iPhone 11 Pro",
+            onlyTesting: "STMDemoAppTests",
             outputDirectory: "fastlane/test_output",
             skipBuild: true,
             deploymentTargetVersion: "14.0"
@@ -34,6 +35,7 @@ public class Fastfile: LaneFile {
             workspace: "STMDemoApp.xcworkspace",
             scheme: "STMDemoAppUITests",
             device: "iPhone 11 Pro",
+            onlyTesting: "STMDemoAppUITests",
             outputDirectory: "fastlane/test_output",
             skipBuild: true,
             deploymentTargetVersion: "14.0"
