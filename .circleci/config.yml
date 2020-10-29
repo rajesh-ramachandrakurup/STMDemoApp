@@ -13,19 +13,19 @@ jobs:
             - restore_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
             - run: |
-                chruby 2.6.6 && gem install bundler
-                chruby 2.6.6 && bundle install --path vendor/bundle
+                gem install bundler
+                bundle install --path vendor/bundle
             - save_cache:
                 key: 1-gems-{{ checksum "Gemfile.lock" }}
                 paths:
                     - vendor/bundle
 
-            - run: chruby 2.6.6 && bundle exec pod install
-            - run: chruby 2.6.6 && ruby -v
+            - run: bundle exec pod install
+            - run: ruby -v
 
             - run:
                 name: fastlane
-                command: chruby 2.6.6 && bundle exec fastlane tests --verbose
+                command: bundle exec fastlane tests --verbose
 
     alternateTests:
         macos:
@@ -47,7 +47,7 @@ jobs:
 
             - run:
                 name: fastlane
-                command: bundle exec fastlane ui_tests
+                command: bundle exec fastlane alternateTests
 
 workflows:
     version: 2
