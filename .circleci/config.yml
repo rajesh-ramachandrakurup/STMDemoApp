@@ -60,14 +60,6 @@ workflows:
                         only:
                             - /feature-.*/
 
-#    pull-requests:
-#        jobs:
-#            - tests:
-#                filters:
-#                    branches:
-#                        only:
-#                            - /fix-.*/
-
     develop-branch:
         jobs:
             - tests:
@@ -84,7 +76,7 @@ workflows:
     nightly:
         triggers:
             - schedule:
-                cron: "20 21 * * *"
+                cron: "0 4 * * *"
                 filters:
                     branches:
                         only:
