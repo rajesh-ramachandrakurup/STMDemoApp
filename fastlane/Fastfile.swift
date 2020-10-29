@@ -19,28 +19,21 @@ public class Fastfile: LaneFile {
         setup()
         runTests(
             workspace: "STMDemoApp.xcworkspace",
-            scheme: "STMDemoAppTests",
-            device: "iPhone 11 Pro",
-            onlyTesting: "STMDemoAppTests",
-            outputDirectory: "fastlane/test_output",
-            skipBuild: true,
-            deploymentTargetVersion: "14.0"
+            scheme: "STMDemoApp",
+            device: "iPhone 11 Pro Max",
+            outputDirectory: "fastlane/test_output"
         )
     }
 
-    func ui_testsLane() {
-        desc("Run iOS UItests")
+    func alternateTestsLane() {
+        desc("Run iOS Unit tests")
         setup()
         runTests(
             workspace: "STMDemoApp.xcworkspace",
-            scheme: "STMDemoAppUITests",
+            scheme: "STMDemoApp",
             device: "iPhone 11 Pro",
-            onlyTesting: "STMDemoAppUITests",
-            outputDirectory: "fastlane/test_output",
-            skipBuild: true,
-            deploymentTargetVersion: "14.0"
+            outputDirectory: "fastlane/test_output"
         )
-        
     }
 
     public func beforeAll(with lane: String) {

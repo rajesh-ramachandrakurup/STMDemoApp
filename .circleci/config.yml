@@ -27,7 +27,7 @@ jobs:
                 name: fastlane
                 command: chruby 2.6.6 && bundle exec fastlane tests --verbose
 
-    ui_tests:
+    alternateTests:
         macos:
             xcode: 12.0.1 # Specify the Xcode version to use
         shell: /bin/bash --login -o pipefail
@@ -76,7 +76,7 @@ workflows:
                         only:
                             - develop
 
-            - ui_tests:
+            - alternateTests:
                 filters:
                     branches:
                         only:
